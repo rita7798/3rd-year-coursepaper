@@ -6,8 +6,9 @@ from nltk import FreqDist
 from nltk.collocations import *
 from pymystem3 import Mystem
 from stop_words import get_stop_words
-ru_stop = get_stop_words('ru')
 
+
+ru_stop = get_stop_words('ru')
 
 mystem_object = Mystem()
 mystem_object.start()
@@ -19,12 +20,12 @@ extra_words = ["понимать", "знать", "хотеть", "глаз", "р
 
 
 #Fantasy
-def processFile(file): 
+def processFileFantasy(file): 
     doc = []
     with open (file, 'r', encoding='utf-8') as f:
-        print(file)
-        text = f.read()[:10000000]
-        print(len(text))
+        #print(file)
+        text = f.read()
+        #print(len(text))
         words = text.split()
         for word in words:
             word = word.lower().strip("[“«–»—!\$%&'()*+,./:;<=>?@^_`{|}~'*-–—...]")
@@ -39,38 +40,38 @@ def processFile(file):
     return doc
 
 
-def processDir(dir):
-    doc_set = []
+def processDirFantasy(dir):
+    doc_setFantasy = []
     dirlist = os.listdir(dir)
     for file in dirlist:
         if file.endswith('proc.txt') and file.startswith('Fantasy'):
-            doc_set.append(processFile(file))
-    return doc_set
+            doc_setFantasy.append(processFileFantasy(file))
+    return doc_setFantasy
 
         
-def topic_modeling(doc_set):
-    print(len(doc_set))
-    dictionary = corpora.Dictionary(doc_set)
-    corpus = [dictionary.doc2bow(text) for text in doc_set]
-    ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=6, id2word = dictionary, passes=20)
+def topic_modelingFantasy(doc_setFantasy):
+    #print(len(doc_setFantasy))
+    dictionary = corpora.Dictionary(doc_setFantasy)
+    corpus = [dictionary.doc2bow(text) for text in doc_setFantasy]
+    ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=4, id2word = dictionary, passes=20)
     ldamodel[corpus]
     print ("\n\ntopics\n\n")
-    for a in ldamodel.show_topics(num_topics=6, num_words=10):
+    for a in ldamodel.show_topics(num_topics=4, num_words=5):
         for i in a:
             print (i)
 
 
-doc_set = processDir('.')    
-topic_modeling(doc_set)
+doc_setFantasy = processDirFantasy('.')    
+topic_modelingFantasy(doc_setFantasy)
 
 
 #Adventures
-def processFile(file): 
+def processFileAdventures(file): 
     doc = []
     with open (file, 'r', encoding='utf-8') as f:
-        print(file)
-        text = f.read()[:10000000]
-        print(len(text))
+        #print(file)
+        text = f.read()
+        #print(len(text))
         words = text.split()
         for word in words:
             word = word.lower().strip("[“«–»—!\$%&'()*+,./:;<=>?@^_`{|}~'*-–—...]")
@@ -85,38 +86,38 @@ def processFile(file):
     return doc
 
 
-def processDir(dir):
-    doc_set = []
+def processDirAdventures(dir):
+    doc_setAdventures = []
     dirlist = os.listdir(dir)
     for file in dirlist:
         if file.endswith('proc.txt') and file.startswith('Adventures'):
-            doc_set.append(processFile(file))
-    return doc_set
+            doc_setAdventures.append(processFileAdventures(file))
+    return doc_setAdventures
 
         
-def topic_modeling(doc_set):
-    print(len(doc_set))
-    dictionary = corpora.Dictionary(doc_set)
-    corpus = [dictionary.doc2bow(text) for text in doc_set]
-    ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=6, id2word = dictionary, passes=20)
+def topic_modelingAdventures(doc_setAdventures):
+    #print(len(doc_setAdventures))
+    dictionary = corpora.Dictionary(doc_setAdventures)
+    corpus = [dictionary.doc2bow(text) for text in doc_setAdventures]
+    ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=4, id2word = dictionary, passes=20)
     ldamodel[corpus]
     print ("\n\ntopics\n\n")
-    for a in ldamodel.show_topics(num_topics=6, num_words=10):
+    for a in ldamodel.show_topics(num_topics=4, num_words=5):
         for i in a:
             print (i)
 
 
-doc_set = processDir('.')    
-topic_modeling(doc_set)
+doc_setAdventures = processDirAdventures('.')    
+topic_modelingAdventures(doc_setAdventures)
 
 
 #Scifi
-def processFile(file): 
+def processFileScifi(file): 
     doc = []
     with open (file, 'r', encoding='utf-8') as f:
-        print(file)
-        text = f.read()[:10000000]
-        print(len(text))
+        #print(file)
+        text = f.read()
+        #print(len(text))
         words = text.split()
         for word in words:
             word = word.lower().strip("[“«–»—!\$%&'()*+,./:;<=>?@^_`{|}~'*-–—...]")
@@ -131,38 +132,38 @@ def processFile(file):
     return doc
 
 
-def processDir(dir):
-    doc_set = []
+def processDirScifi(dir):
+    doc_setScifi = []
     dirlist = os.listdir(dir)
     for file in dirlist:
         if file.endswith('proc.txt') and file.startswith('Scifi'):
-            doc_set.append(processFile(file))
-    return doc_set
+            doc_setScifi.append(processFileScifi(file))
+    return doc_setScifi
 
         
-def topic_modeling(doc_set):
-    print(len(doc_set))
-    dictionary = corpora.Dictionary(doc_set)
-    corpus = [dictionary.doc2bow(text) for text in doc_set]
-    ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=6, id2word = dictionary, passes=20)
+def topic_modelingScifi(doc_setScifi):
+    #print(len(doc_setScifi))
+    dictionary = corpora.Dictionary(doc_setScifi)
+    corpus = [dictionary.doc2bow(text) for text in doc_setScifi]
+    ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=4, id2word = dictionary, passes=20)
     ldamodel[corpus]
     print ("\n\ntopics\n\n")
-    for a in ldamodel.show_topics(num_topics=6, num_words=10):
+    for a in ldamodel.show_topics(num_topics=4, num_words=5):
         for i in a:
             print (i)
 
 
-doc_set = processDir('.')    
-topic_modeling(doc_set)
+doc_setScifi = processDirScifi('.')    
+topic_modelingScifi(doc_setScifi)
 
 
 #Horror
-def processFile(file): 
+def processFileHorror(file): 
     doc = []
     with open (file, 'r', encoding='utf-8') as f:
-        print(file)
-        text = f.read()[:10000000]
-        print(len(text))
+        #print(file)
+        text = f.read()
+        #print(len(text))
         words = text.split()
         for word in words:
             word = word.lower().strip("[“«–»—!\$%&'()*+,./:;<=>?@^_`{|}~'*-–—...]")
@@ -177,38 +178,38 @@ def processFile(file):
     return doc
 
 
-def processDir(dir):
-    doc_set = []
+def processDirHorror(dir):
+    doc_setHorror = []
     dirlist = os.listdir(dir)
     for file in dirlist:
         if file.endswith('proc.txt') and file.startswith('Horror'):
-            doc_set.append(processFile(file))
-    return doc_set
+            doc_setHorror.append(processFileHorror(file))
+    return doc_setHorror
 
         
-def topic_modeling(doc_set):
-    print(len(doc_set))
-    dictionary = corpora.Dictionary(doc_set)
-    corpus = [dictionary.doc2bow(text) for text in doc_set]
-    ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=6, id2word = dictionary, passes=20)
+def topic_modelingHorror(doc_setHorror):
+    #print(len(doc_setHorror))
+    dictionary = corpora.Dictionary(doc_setHorror)
+    corpus = [dictionary.doc2bow(text) for text in doc_setHorror]
+    ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=4, id2word = dictionary, passes=20)
     ldamodel[corpus]
     print ("\n\ntopics\n\n")
-    for a in ldamodel.show_topics(num_topics=6, num_words=10):
+    for a in ldamodel.show_topics(num_topics=4, num_words=5):
         for i in a:
             print (i)
 
 
-doc_set = processDir('.')    
-topic_modeling(doc_set)
+doc_setHorror = processDirHorror('.')    
+topic_modelingHorror(doc_setHorror)
 
 
 #Detectives
-def processFile(file): 
+def processFileDetectives(file): 
     doc = []
     with open (file, 'r', encoding='utf-8') as f:
-        print(file)
-        text = f.read()[:10000000]
-        print(len(text))
+        #print(file)
+        text = f.read()
+        #print(len(text))
         words = text.split()
         for word in words:
             word = word.lower().strip("[“«–»—!\$%&'()*+,./:;<=>?@^_`{|}~'*-–—...]")
@@ -223,38 +224,38 @@ def processFile(file):
     return doc
 
 
-def processDir(dir):
-    doc_set = []
+def processDirDetectives(dir):
+    doc_setDetectives = []
     dirlist = os.listdir(dir)
     for file in dirlist:
         if file.endswith('proc.txt') and file.startswith('Detectives'):
-            doc_set.append(processFile(file))
-    return doc_set
+            doc_setDetectives.append(processFileDetectives(file))
+    return doc_setDetectives
 
         
-def topic_modeling(doc_set):
-    print(len(doc_set))
-    dictionary = corpora.Dictionary(doc_set)
-    corpus = [dictionary.doc2bow(text) for text in doc_set]
-    ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=6, id2word = dictionary, passes=20)
+def topic_modelingDetectives(doc_setDetectives):
+    #print(len(doc_setDetectives))
+    dictionary = corpora.Dictionary(doc_setDetectives)
+    corpus = [dictionary.doc2bow(text) for text in doc_setDetectives]
+    ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=4, id2word = dictionary, passes=20)
     ldamodel[corpus]
     print ("\n\ntopics\n\n")
-    for a in ldamodel.show_topics(num_topics=6, num_words=10):
+    for a in ldamodel.show_topics(num_topics=4, num_words=5):
         for i in a:
             print (i)
 
 
-doc_set = processDir('.')    
-topic_modeling(doc_set)
+doc_setDetectives = processDirDetectives('.')    
+topic_modelingDetectives(doc_setDetectives)
 
 
 #Cyber
-def processFile(file): 
+def processFileCyber(file): 
     doc = []
     with open (file, 'r', encoding='utf-8') as f:
-        print(file)
+        #print(file)
         text = f.read()
-        print(len(text))
+        #print(len(text))
         words = text.split()
         for word in words:
             word = word.lower().strip("[“«–»—!\$%&'()*+,./:;<=>?@^_`{|}~'*-–—...]")
@@ -269,26 +270,26 @@ def processFile(file):
     return doc
 
 
-def processDir(dir):
-    doc_set = []
+def processDirCyber(dir):
+    doc_setCyber = []
     dirlist = os.listdir(dir)
     for file in dirlist:
         if file.endswith('proc.txt') and file.startswith('Cyber'):
-            doc_set.append(processFile(file))
-    return doc_set
+            doc_setCyber.append(processFileCyber(file))
+    return doc_setCyber
 
         
-def topic_modeling(doc_set):
-    print(len(doc_set))
-    dictionary = corpora.Dictionary(doc_set)
-    corpus = [dictionary.doc2bow(text) for text in doc_set]
-    ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=6, id2word = dictionary, passes=20)
+def topic_modelingCyber(doc_setCyber):
+    #print(len(doc_setCyber))
+    dictionary = corpora.Dictionary(doc_setCyber)
+    corpus = [dictionary.doc2bow(text) for text in doc_setCyber]
+    ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=4, id2word = dictionary, passes=20)
     ldamodel[corpus]
     print ("\n\ntopics\n\n")
-    for a in ldamodel.show_topics(num_topics=6, num_words=10):
+    for a in ldamodel.show_topics(num_topics=4, num_words=5):
         for i in a:
             print (i)
 
 
-doc_set = processDir('.')    
-topic_modeling(doc_set)
+doc_setCyber = processDirCyber('.')    
+topic_modelingCyber(doc_setCyber)
